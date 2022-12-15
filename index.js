@@ -27,7 +27,7 @@ const processes = new Promise((resolve, reject) => {
   });
 });
 
-app.get("/procman", (req, res) => {
+app.get("/procman/getprocess", (req, res) => {
   Promise.all([processNameList, processes]).then(([processNameList, processes]) => {
     const response = [];
     for (let name of processNameList) {
@@ -42,11 +42,12 @@ app.get("/procman", (req, res) => {
   });
 });
 
-app.post("/killapp", (req, res) => {
-  const pid = req.body.pid;
+app.get("/procman/killapp/:pid", (req, res) => {
+  const pid = req.params.pid;
+  console.log(pid);
   if (!pid) res.send("No pid");
-  const killAppActin = new Promise((res, rej) => {
-    res(process.kill(pid));
+  const killAppActin = new Promise((resolve, rej) => {
+    resolve(process.kill(pid));
   });
   killAppActin.then(() => res.send("kill app success")).catch();
 });
@@ -54,5 +55,5 @@ app.post("/killapp", (req, res) => {
 const port = process.env.port || 9527;
 
 app.listen({ port }, () => {
-  console.log(` Server ready at http://localhost:${port}`);
+  console.log(` Server ready at http://localhost:${port}/procman`);
 });
