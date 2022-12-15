@@ -27,6 +27,10 @@ const processes = new Promise((resolve, reject) => {
   });
 });
 
+app.get("/procman", (req, res) => {
+  res.send("Truy cập Remote Process Manager thành công");
+});
+
 app.get("/procman/getprocess", (req, res) => {
   Promise.all([processNameList, processes]).then(([processNameList, processes]) => {
     const response = [];
