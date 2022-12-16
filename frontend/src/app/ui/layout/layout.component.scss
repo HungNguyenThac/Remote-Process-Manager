@@ -1,0 +1,27 @@
+.layout-wrapper {
+  height: 100vh;
+}
+.layout-container {
+  margin: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100% - 100px);
+  .side-nav-container {
+    width: 300px;
+    height: 100%;
+    background: chocolate;
+    border-radius: 12px;
+    padding: 0 12px;
+  }
+  .content-container {
+    border-radius: 12px;
+    margin-left: 12px;
+    background: chocolate;
+    height: 100%;
+    width: calc(100% - 300px);
+    div {
+      padding: 12px;
+    }
+  }
+}

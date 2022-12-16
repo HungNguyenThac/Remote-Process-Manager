@@ -1,0 +1,23 @@
+<mat-nav-list>
+  <div class="side-nav-title">
+    <h2>Danh mục</h2>
+  </div>
+  <a
+    mat-list-item
+    routerLink="applications"
+    routerLinkActive="activeRoute"
+    [routerLinkActiveOptions]="{ exact: true }"
+    class="nav-item"
+  >
+    <span class="nav-item-content">Chương trình đang chạy</span>
+  </a>
+  <a
+    mat-list-item
+    routerLink="processes"
+    routerLinkActive="activeRoute"
+    [routerLinkActiveOptions]="{ exact: true }"
+    class="nav-item"
+  >
+    <span class="nav-item-content">Tiến trình đang chạy</span>
+  </a>
+</mat-nav-list>

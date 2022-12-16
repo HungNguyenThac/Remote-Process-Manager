@@ -1,0 +1,23 @@
+<div class="login-wrapper">
+  <div class="login-container">
+    <form class="login-form" [formGroup]="formLogin" (ngSubmit)="submitForm()">
+      <app-input
+        [fieldGroup]="formLogin"
+        [fieldControlName]="'loginName'"
+        [label]="'Tên đăng nhập'"
+      ></app-input>
+      <app-input
+        [fieldGroup]="formLogin"
+        [fieldControlName]="'password'"
+        [label]="'Mật khẩu'"
+        [fieldType]="'password'"
+      >
+      </app-input>
+      <div class="login-action">
+        <button mat-button mat-raised-button class="login-action" type="submit">
+          <span class="login-action-login">Đăng nhập</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

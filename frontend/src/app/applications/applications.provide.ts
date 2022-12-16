@@ -1,3 +1,3 @@
 import { Provider } from "@angular/core";
 
-export const managerProvide: Provider[] = [];
+export const applicationsProvide: Provider[] = [];
