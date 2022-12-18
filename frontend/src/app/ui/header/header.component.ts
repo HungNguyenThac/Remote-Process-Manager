@@ -6,8 +6,8 @@ import {
 } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { MatToolbarModule } from "@angular/material/toolbar";
-import { MatButtonModule } from "@angular/material/button";
 import { Router } from "@angular/router";
+import { MatButtonModule } from "@angular/material/button";
 
 @Component({
   selector: "app-header",
@@ -21,11 +21,11 @@ import { Router } from "@angular/router";
           display: flex;
           justify-content: space-between;
           align-items: center;
-          background: chocolate;
           margin: 0 12px;
           border-radius: 0 0 12px 12px;
           padding: 0 12px;
           height: 76px;
+          background: white;
           .header-content {
             font-size: 32px;
           }

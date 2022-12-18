@@ -1,0 +1,34 @@
+.app-search-wrapper {
+  padding-top: 24px;
+  display: flex;
+  justify-content: center;
+}
+.app-table-wrapper {
+  max-height: calc(100% - 180px);
+  height: calc(100% - 180px);
+
+  & > div {
+    max-height: 100%;
+    height: 100%;
+    overflow-y: auto;
+  }
+}
+.app-pagination-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 12px;
+  .button-group {
+    display: flex;
+    align-items: center;
+    button {
+      width: 140px;
+    }
+    button:last-child {
+      margin-left: 32px;
+    }
+  }
+  app-paginator {
+    display: inline-block;
+  }
+}

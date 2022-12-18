@@ -5,7 +5,7 @@ import { processesProvide } from "@app/processes/processes.provide";
 export const layoutRoutes: Routes = [
   {
     path: "",
-    redirectTo: "manager",
+    redirectTo: "applications",
     pathMatch: "full",
   },
   {

@@ -1,0 +1,26 @@
+<div class="dialog-wrapper">
+  <div class="dialog-container">
+    <div class="dialog-title">
+      <h4>Xác nhận đóng ứng dụng</h4>
+    </div>
+    <div class="dialog-content">
+      <button
+        mat-button
+        mat-raised-button
+        color="accent"
+        (click)="matDialogRef.close(false)"
+      >
+        Huỷ
+      </button>
+      <button
+        mat-button
+        mat-raised-button
+        tabindex="1"
+        color="primary"
+        (click)="matDialogRef.close(true)"
+      >
+        Xác nhận
+      </button>
+    </div>
+  </div>
+</div>

@@ -4,9 +4,9 @@ import {
   FormGroup,
   ReactiveFormsModule,
 } from "@angular/forms";
-import { MatInputModule } from "@angular/material/input";
 import { NgClass, NgIf } from "@angular/common";
 import { injectErrorMessageService } from "@shared/services/get-errors-message.service";
+import { MatInputModule } from "@angular/material/input";
 
 @Component({
   selector: "app-input",
@@ -21,7 +21,7 @@ import { injectErrorMessageService } from "@shared/services/get-errors-message.s
       }
     `,
   ],
-  imports: [MatInputModule, ReactiveFormsModule, NgClass, NgIf],
+  imports: [ReactiveFormsModule, NgClass, NgIf, MatInputModule],
   providers: [],
 })
 export class CustomInputComponent implements OnInit {

@@ -1,5 +1,8 @@
 mat-nav-list {
   padding-top: 0;
+  .mat-mdc-list-item-interactive:focus::before {
+    opacity: 0;
+  }
 }
 .side-nav-title {
   border-bottom: 0.5px solid black;
@@ -14,10 +17,20 @@ mat-nav-list {
   }
 }
 .nav-item {
+  border-radius: 8px;
+  transition: all 0.5s ease-in-out;
   &-content {
     font-size: 20px;
   }
 }
 .nav-item + .nav-item {
   margin-top: 12px;
+}
+
+.activeRoute {
+  color: white;
+  background: #ff0000;
+  .nav-item-content {
+    color: white;
+  }
 }

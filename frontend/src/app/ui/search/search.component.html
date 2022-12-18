@@ -1,0 +1,18 @@
+<mat-form-field appearance="outline" style="width: 500px">
+  <mat-label>Tìm kiếm </mat-label>
+  <input
+    matInput
+    type="text"
+    placeholder="Tìm kiếm..."
+    [formControl]="queryControl"
+  />
+  <button
+    *ngIf="queryControl.value"
+    matSuffix
+    mat-icon-button
+    aria-label="Clear"
+    (click)="queryControl.reset()"
+  >
+    <mat-icon>close</mat-icon>
+  </button>
+</mat-form-field>

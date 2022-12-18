@@ -5,8 +5,12 @@ import {
   OnStoreInit,
   provideComponentStore,
 } from "@ngrx/component-store";
+import { map, pipe, tap } from "rxjs";
+import {
+  injectDefaultPageSize,
+  provideDefaultPageSize,
+} from "@shared/tokens/tokens";
 import { PageEvent } from "@angular/material/paginator";
-import { debounceTime, map, pipe, tap } from "rxjs";
 
 export interface IPaginator {
   currentPage: number;
@@ -16,12 +20,16 @@ export interface IPaginator {
 
 export type PageEventOmitLength = Omit<PageEvent, "length">;
 
+export interface ConfigPagination {
+  pageSize: number;
+}
+
 @Injectable()
 export class PaginationStoreService
   extends ComponentStore<IPaginator>
   implements OnStoreInit, OnStateInit
 {
-  readonly defaultPageSize = 15;
+  readonly defaultPageSize = injectDefaultPageSize();
 
   readonly paginator$ = this.select(
     {
@@ -41,7 +49,6 @@ export class PaginationStoreService
 
   readonly setPage = this.effect<PageEventOmitLength>(
     pipe(
-      debounceTime(150),
       tap((event) => {
         this.patchState({
           pageSize: event.pageSize,
@@ -62,6 +69,8 @@ export class PaginationStoreService
   ngrxOnStateInit(): void {}
 }
 
-export const providePagination = () =>
-  provideComponentStore(PaginationStoreService);
+export const providePagination = (config?: ConfigPagination) => [
+  provideComponentStore(PaginationStoreService),
+  provideDefaultPageSize(config?.pageSize ?? 15),
+];
 export const injectPagination = () => inject(PaginationStoreService);

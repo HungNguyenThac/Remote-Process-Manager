@@ -5,17 +5,18 @@ import { AppComponent } from "@app/app.component";
 import { provideRouter } from "@angular/router";
 import { appRoutes } from "@app/app-routing";
 import { appImports } from "@app/app.import";
-import { appProvide } from "@app/app.provide";
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { appProvide, httpInterceptor } from "@app/app.provide";
+import { provideHttpClient, withInterceptors } from "@angular/common/http";
 
 if (environment.production) {
   enableProdMode();
 }
 bootstrapApplication(AppComponent, {
   providers: [
-    importProvidersFrom(appImports, BrowserAnimationsModule),
+    importProvidersFrom(appImports),
     provideRouter(appRoutes),
     appProvide,
+    provideHttpClient(withInterceptors([httpInterceptor])),
   ],
 })
   .then()

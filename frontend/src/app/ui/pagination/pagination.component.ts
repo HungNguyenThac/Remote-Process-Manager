@@ -1,8 +1,9 @@
 import { AsyncPipe, NgIf } from "@angular/common";
 import { Component } from "@angular/core";
-import { MatPaginatorModule, PageEvent } from "@angular/material/paginator";
+
 import { LetModule } from "@ngrx/component";
 import { injectPagination } from "@shared/data-access/pagination-store.service";
+import { MatPaginatorModule, PageEvent } from "@angular/material/paginator";
 
 @Component({
   selector: "app-paginator",

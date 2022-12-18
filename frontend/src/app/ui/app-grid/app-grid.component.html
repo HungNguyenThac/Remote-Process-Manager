@@ -1,3 +1,19 @@
-<app-search></app-search>
-<app-table></app-table>
-<app-paginator></app-paginator>
+<div class="app-search-wrapper">
+  <app-search></app-search>
+</div>
+<div class="app-table-wrapper">
+  <div class="mat-elevation-z8" tabindex="0">
+    <app-table></app-table>
+  </div>
+</div>
+<div class="app-pagination-wrapper">
+  <div class="button-group">
+    <button mat-button mat-raised-button (click)="handleExportExcel()">
+      Export all
+    </button>
+    <button mat-button mat-raised-button (click)="handleExportExcel('page')">
+      Export page
+    </button>
+  </div>
+  <app-paginator></app-paginator>
+</div>

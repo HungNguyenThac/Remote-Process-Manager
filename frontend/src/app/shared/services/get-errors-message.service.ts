@@ -14,11 +14,7 @@ export class ErrorMessages {
     minlength: "#FieldName# phải lớn hơn 6 ký tự",
   };
   getErrorMessage = (key: string, fieldControlName: string) => {
-    const message = this.objectMessages[key].replace(
-      "#FieldName#",
-      fieldControlName,
-    );
-    return message;
+    return this.objectMessages[key].replace("#FieldName#", fieldControlName);
   };
 }
 

@@ -11,8 +11,8 @@ import {
   Validators,
 } from "@angular/forms";
 import { CustomInputComponent } from "@app/ui/app-input/app-input.component";
-import { MatButtonModule } from "@angular/material/button";
 import { Router } from "@angular/router";
+import { MatButtonModule } from "@angular/material/button";
 
 @Component({
   selector: "app-login",
@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
   submitForm() {
     this.formLogin.markAllAsTouched();
     if (this.formLogin.invalid) return;
-    this.router.navigate(["manager"]).then();
+    this.router.navigate(["procman"]).then();
   }
 
   ngOnInit(): void {}

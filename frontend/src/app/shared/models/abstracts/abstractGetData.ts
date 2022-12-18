@@ -2,9 +2,9 @@ import { Observable, Subscription } from "rxjs";
 import { inject } from "@angular/core";
 
 export interface ParamGetData {
-  page: number;
-  pageSize: number;
-  query: string;
+  page?: number;
+  pageSize?: number;
+  query?: string;
 }
 
 export abstract class AbstractGetData {
