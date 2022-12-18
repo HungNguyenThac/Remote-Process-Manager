@@ -13,6 +13,7 @@ import {
   Observable,
   of,
   pipe,
+  repeat,
   switchMap,
   tap,
   withLatestFrom,
@@ -29,7 +30,6 @@ import {
   provideKindOfGetData,
 } from "@shared/tokens/tokens";
 import { injectProcessService } from "@shared/services/processes.service";
-import { dataSample } from "@shared/static-data/data.sample";
 import { IProcessInfoTransformed } from "@app/ui/table/table.component";
 
 export interface IProcessInfo {
@@ -62,10 +62,6 @@ interface ConfigProvideAppStore {
   kindOfGetData?: string;
 }
 
-export interface CustomObject {
-  [K: string]: string | number;
-}
-
 @Injectable()
 export class AppStoreService
   extends ComponentStore<AppState>
@@ -82,6 +78,7 @@ export class AppStoreService
       debounce: true,
     },
   );
+
   dataDisplayTable$: Observable<IProcessInfoTransformed[]> = this.select(
     (s) => {
       const processes = s.dataQuery.length === 0 ? s.mainData : s.dataQuery;
@@ -99,7 +96,6 @@ export class AppStoreService
 
   query$ = this.select((s) => s.query);
 
-  // getData
   getData = this.effect<{ query: string }>(
     pipe(
       switchMap(({ query }) =>
@@ -108,14 +104,12 @@ export class AppStoreService
             this.setQuery(query);
             return of([]);
           }
-          this.patchState({ isFetchingData: true });
-          // return this.kindOfGetData === "applications"
-          //   ? this.processService.getApplications()
-          //   : this.processService.getAllProcess();
-          return of(dataSample);
-        }),
+          // this.patchState({ isFetchingData: true });
+          return this.kindOfGetData === "applications"
+            ? this.processService.getApplications()
+            : this.processService.getAllProcess();
+        }).pipe(repeat({ delay: 1500 })),
       ),
-      // delay(2000),
       tap((response) => {
         if (response.length === 0) return;
         this.paginationStore.setTotal(response.length);
@@ -141,7 +135,7 @@ export class AppStoreService
   killApp = this.effect<IProcessInfoTransformed>(
     pipe(
       switchMap(({ pid }) => {
-        return of(true);
+        return this.processService.postKillApp(pid);
       }),
       tap((response) => {
         if (response)
@@ -156,6 +150,9 @@ export class AppStoreService
     pipe(
       withLatestFrom(this.select((s) => s.mainData)),
       switchMap(([query, data]) => {
+        this.patchState({
+          query,
+        });
         const dataMatchQuery = data.filter((process) => {
           return (
             process.name.toLowerCase().startsWith(query.toLowerCase()) ||
@@ -177,6 +174,7 @@ export class AppStoreService
           );
           this.paginationStore.setTotal(response.length);
 
+          //patch state here
           this.setData(
             this.select(
               {
@@ -194,12 +192,12 @@ export class AppStoreService
   );
 
   setData = this.effect<{
-    page: number;
-    pageSize: number;
     data: IProcessInfo[];
+    pageSize: number;
+    page: number;
   }>(
     pipe(
-      switchMap(({ page, pageSize, data }) => {
+      switchMap(({ data, pageSize, page }) => {
         const pageIndex = page - 1;
         const itemIndex = pageIndex * pageSize;
         const response = data.slice(itemIndex, page * pageSize);
@@ -236,6 +234,7 @@ export class AppStoreService
     );
   }
 }
+
 export const provideAppStore = (config?: ConfigProvideAppStore) => {
   return [
     provideComponentStore(AppStoreService),
