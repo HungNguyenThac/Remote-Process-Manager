@@ -20,7 +20,7 @@ export class MatSnackbarService
   storeService = injectAppStore();
   snackbar = inject(MatSnackBar);
 
-  objGetNotify = {
+  objNotify = {
     [KillAppNotify.SUCCESS]: () =>
       this.snackbar
         .open("Đóng ứng dụng thành công", "", {
@@ -50,11 +50,7 @@ export class MatSnackbarService
   };
 
   openSnackbar = this.effect<KillAppNotify>(
-    pipe(
-      tap((notify) => {
-        return this.objGetNotify[notify]();
-      }),
-    ),
+    pipe(tap((notify) => this.objNotify[notify]())),
   );
   ngrxOnStoreInit() {
     this.setState({ openSnackBar: false });

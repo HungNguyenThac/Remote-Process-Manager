@@ -11,7 +11,7 @@ export abstract class AbstractGetData {
   abstract getData(
     param: ParamGetData | Observable<ParamGetData>,
   ): Subscription;
-  abstract data$: Observable<any>;
+  abstract dataQuery$: Observable<any>;
 }
 
 export const injectAbstractGetData = () => inject(AbstractGetData);

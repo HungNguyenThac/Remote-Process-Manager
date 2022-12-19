@@ -12,6 +12,7 @@ import { MatButtonModule } from "@angular/material/button";
 import { injectAbstractKillApp } from "@shared/models/abstracts/abstractKillApp";
 import { MatDialog } from "@angular/material/dialog";
 import ConfirmDialogComponent from "@app/ui/confirm-dialog/confirm-dialog.component";
+import { CalcPositionColumnTablePipe } from "@shared/pipes/calc-position-column-table.pipe";
 
 interface IDisplayedColumns {
   dataFieldName: string;
@@ -30,7 +31,12 @@ export interface IProcessInfoTransformed {
 @Component({
   selector: "app-table",
   standalone: true,
-  imports: [CommonModule, MatTableModule, MatButtonModule],
+  imports: [
+    CommonModule,
+    MatTableModule,
+    MatButtonModule,
+    CalcPositionColumnTablePipe,
+  ],
   templateUrl: "./table.component.html",
   styleUrls: ["table.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush,

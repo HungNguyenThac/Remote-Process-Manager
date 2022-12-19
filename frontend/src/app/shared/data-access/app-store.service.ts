@@ -31,6 +31,7 @@ import {
 } from "@shared/tokens/tokens";
 import { injectProcessService } from "@shared/services/processes.service";
 import { IProcessInfoTransformed } from "@app/ui/table/table.component";
+import { Router } from "@angular/router";
 
 export interface IProcessInfo {
   pid: number;
@@ -71,17 +72,15 @@ export class AppStoreService
   readonly processService = injectProcessService();
   readonly paginationStore = injectPagination();
   readonly kindOfGetData = injectKindOfGetData();
+  readonly router = inject(Router);
 
-  data$ = this.select(
-    (s) => (s.dataQuery.length == 0 ? s.mainData : s.dataQuery),
-    {
-      debounce: true,
-    },
-  );
+  dataQuery$ = this.select((s) => s.dataQuery, {
+    debounce: true,
+  });
 
   dataDisplayTable$: Observable<IProcessInfoTransformed[]> = this.select(
     (s) => {
-      const processes = s.dataQuery.length === 0 ? s.mainData : s.dataQuery;
+      const processes = s.dataQuery;
       return processes.map((process) => {
         let newProcess: any = process;
         const mem = newProcess.mem;
@@ -100,6 +99,7 @@ export class AppStoreService
     pipe(
       switchMap(({ query }) =>
         defer(() => {
+          if (!this.router.url.includes(this.kindOfGetData)) return of([]);
           if (query) {
             this.setQuery(query);
             return of([]);
@@ -224,6 +224,7 @@ export class AppStoreService
   }
 
   ngrxOnStateInit() {
+    // getData
     this.getData(
       this.select(
         {

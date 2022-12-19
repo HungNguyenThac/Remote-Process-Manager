@@ -2,10 +2,8 @@ import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { AppGridComponent } from "@app/ui/app-grid/app-grid.component";
 import { LetModule } from "@ngrx/component";
-import { injectAbstractGetData } from "@shared/models/abstracts/abstractGetData";
 import { LoadingComponent } from "@app/ui/loading/loading.component";
 import { injectLoadingService } from "@shared/services/loading.service";
-import { injectMatSnackbarService } from "@shared/services/mat-snackbar.service";
 
 @Component({
   selector: "app-applications",
@@ -17,8 +15,6 @@ import { injectMatSnackbarService } from "@shared/services/mat-snackbar.service"
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ApplicationsComponent implements OnInit {
-  private readonly storeService = injectAbstractGetData();
   readonly isLoading$ = injectLoadingService().isLoading$;
-  private readonly snackbarService = injectMatSnackbarService();
   ngOnInit(): void {}
 }
